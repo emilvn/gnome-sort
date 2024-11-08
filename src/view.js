@@ -15,6 +15,12 @@ export function displayGnomes(gnomes) {
   });
 }
 
+export function displayIterations(iterations) {
+  document
+    .querySelectorAll(".iterations")
+    .forEach((i) => (i.innerText = iterations));
+}
+
 export function highlightCurrentGnome(index) {
   const gnomes = document.querySelectorAll(".gnome");
   gnomes.forEach((gnome, i) => {

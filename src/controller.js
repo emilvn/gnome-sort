@@ -7,6 +7,7 @@ let MAX_STACK_HEIGHT = 10;
 let ARR_LENGTH = 30;
 let gnomes;
 let restart = false;
+let iterations = 0;
 
 function main() {
   view.initEventListeners();
@@ -14,6 +15,7 @@ function main() {
 }
 
 function init() {
+  iterations = 0;
   view.hideOverlay();
   restart = false;
   gnomes = makeGnomeArray(MAX_STACK_HEIGHT, ARR_LENGTH);
@@ -30,7 +32,9 @@ export function gnomeRestart() {
 async function gnomeSort(arr) {
   let i = 0;
   while (i < arr.length) {
+    iterations++;
     view.displayGnomes(gnomes);
+    view.displayIterations(iterations);
     view.highlightCurrentGnome(i);
     if (i === 0 || arr[i] >= arr[i - 1]) {
       i++;
