@@ -3,8 +3,8 @@ import * as view from "./view.js";
 window.addEventListener("load", main);
 
 let TICK_RATE = 100;
-let MAX_STACK_HEIGHT = 10;
-let ARR_LENGTH = 30;
+let MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 2;
+let ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 1;
 let gnomes;
 let restart = false;
 let iterations = 0;

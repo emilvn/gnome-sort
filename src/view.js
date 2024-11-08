@@ -1,8 +1,11 @@
 import * as controller from "./controller.js";
 
-const GNOME_HEIGHT = getComputedStyle(
+export const GNOME_HEIGHT = getComputedStyle(
   document.documentElement
 ).getPropertyValue("--gnome-height");
+export const GNOME_WIDTH = getComputedStyle(
+  document.documentElement
+).getPropertyValue("--gnome-width");
 
 export function displayGnomes(gnomes) {
   const container = document.querySelector(".container");
