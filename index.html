@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gnome sort</title>
+    <style>
+      :root {
+        --gnome-height: 62;
+        --gnome-width: 48;
+      }
+      body {
+        margin: 0;
+        padding: 8px;
+        background: #555;
+        font-family: monospace;
+      }
+      .gnome {
+        background-image: url("public/gnome.svg");
+        width: 48px;
+      }
+      .container {
+        display: flex;
+        align-items: flex-end;
+        border: 2px dashed white;
+        width: fit-content;
+      }
+      .current {
+        filter: invert(1);
+      }
+      .inputs {
+        display: flex;
+        gap: 4px;
+        color: white;
+        font-size: larger;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <form class="inputs">
+      <label>
+        Max gnome stack height:
+        <input
+          type="number"
+          name="stack_height"
+          placeholder="Gnome stack height"
+        />
+      </label>
+      <label>
+        Gnome array length:
+        <input
+          type="number"
+          name="arr_length"
+          placeholder="Gnome array length"
+        />
+      </label>
+      <label>
+        Tick rate(ms):
+        <input type="number" name="tick_rate" placeholder="Tick rate(ms)" />
+      </label>
+      <button>OK</button>
+      <button type="button" id="restart-button">Restart</button>
+    </form>
+    <script src="src/controller.js" type="module"></script>
+  </body>
+</html>
