@@ -31,16 +31,24 @@
       }
       .inputs {
         display: flex;
-        gap: 4px;
+        max-width: 800px;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 20px;
         color: white;
         font-size: larger;
-        margin-top: 10px;
       }
+      .inputs > label {
+        display: flex;
+        flex-direction: column;
+      }
+
       button {
         font-family: monospace;
         border-radius: 5px;
         border: 0;
         cursor: pointer;
+        height: 20px;
       }
       .gnomed {
         position: absolute;
@@ -74,7 +82,9 @@
         <div class="gnome"></div>
       </div>
     </div>
-    <div class="inputs">Iterations: <span class="iterations"></span></div>
+    <div style="text-align: right">
+      Iterations: <span class="iterations"></span>
+    </div>
     <form class="inputs">
       <label>
         Max gnome stack height:
@@ -96,8 +106,10 @@
         Tick rate(ms):
         <input type="number" name="tick_rate" placeholder="Tick rate(ms)" />
       </label>
-      <button>OK</button>
-      <button type="button" class="restart-button">Restart</button>
+      <div>
+        <button>OK</button>
+        <button type="button" class="restart-button">Restart</button>
+      </div>
     </form>
     <script src="src/controller.js" type="module"></script>
   </body>
