@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gnome sort</title>
+    <link rel="shortcut icon" href="public/gnome.svg" type="image/x-icon" />
     <style>
       :root {
         --gnome-height: 62;
@@ -35,10 +36,43 @@
         font-size: larger;
         margin-top: 10px;
       }
+      button {
+        font-family: monospace;
+        border-radius: 5px;
+        border: 0;
+        cursor: pointer;
+      }
+      .gnomed {
+        position: absolute;
+        background-color: rgba(5, 5, 5, 0.5);
+        color: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        inset: 0;
+        font-size: xx-large;
+        padding: 8px;
+        backdrop-filter: blur(10px);
+      }
+      .gnomed > .gnome {
+        height: calc(var(--gnome-height) * 5px);
+        width: calc(var(--gnome-width) * 5px);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     </style>
   </head>
   <body>
-    <div class="container"></div>
+    <div style="position: relative; width: fit-content">
+      <div class="container"></div>
+      <div class="gnomed">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          You've been gnomed!
+          <button type="button" class="restart-button">Restart</button>
+        </div>
+        <div class="gnome"></div>
+      </div>
+    </div>
     <form class="inputs">
       <label>
         Max gnome stack height:
@@ -61,7 +95,7 @@
         <input type="number" name="tick_rate" placeholder="Tick rate(ms)" />
       </label>
       <button>OK</button>
-      <button type="button" id="restart-button">Restart</button>
+      <button type="button" class="restart-button">Restart</button>
     </form>
     <script src="src/controller.js" type="module"></script>
   </body>

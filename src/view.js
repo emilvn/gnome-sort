@@ -28,7 +28,17 @@ export function highlightCurrentGnome(index) {
 
 export function initEventListeners() {
   const form = document.querySelector("form");
-  const restartButton = document.querySelector("#restart-button");
+  const restartButtons = document.querySelectorAll(".restart-button");
   form.addEventListener("submit", controller.submitForm);
-  restartButton.addEventListener("click", controller.gnomeRestart);
+  restartButtons.forEach((button) =>
+    button.addEventListener("click", controller.gnomeRestart)
+  );
+}
+
+export function hideOverlay() {
+  document.querySelector(".gnomed").style.display = "none";
+}
+
+export function youveBeenGnomed() {
+  document.querySelector(".gnomed").style.display = "flex";
 }

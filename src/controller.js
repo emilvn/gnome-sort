@@ -14,6 +14,7 @@ function main() {
 }
 
 function init() {
+  view.hideOverlay();
   restart = false;
   gnomes = makeGnomeArray(MAX_STACK_HEIGHT, ARR_LENGTH);
   view.displayGnomes(gnomes);
@@ -40,6 +41,7 @@ async function gnomeSort(arr) {
     if (restart) break;
     await sleep(TICK_RATE);
   }
+  view.youveBeenGnomed();
 }
 
 function swapGnomes(i, j, arr) {
