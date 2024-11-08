@@ -46,7 +46,7 @@ async function gnomeSort(arr) {
       swapGnomes(i, i - 1, arr);
       i--;
     }
-    if (restart) break;
+    if (restart) return;
     await sleep(TICK_RATE);
   }
   view.weveBeenSorted();
