@@ -71,7 +71,7 @@ export function submitForm(e) {
   const maxHeight = !isNaN(Number(e.target.stack_height.value))
     ? Number(e.target.stack_height.value)
     : MAX_STACK_HEIGHT;
-  const arrLen = !isNaN(Number(e.target.length.value))
+  const arrLen = !isNaN(Number(e.target.arr_length.value))
     ? Number(e.target.arr_length.value)
     : ARR_LENGTH;
 
