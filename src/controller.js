@@ -2,8 +2,8 @@ import * as view from "./view.js";
 
 window.addEventListener("load", main);
 let TICK_RATE = 100;
-let MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 2;
-let ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 1;
+let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 2);
+let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 1);
 window.addEventListener("resize", () => {
   MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 2;
   ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 1;
@@ -49,7 +49,7 @@ async function gnomeSort(arr) {
     if (restart) break;
     await sleep(TICK_RATE);
   }
-  view.youveBeenGnomed();
+  view.weveBeenSorted();
 }
 
 function swapGnomes(i, j, arr) {

@@ -48,6 +48,6 @@ export function hideOverlay() {
   document.querySelector(".gnomed").style.display = "none";
 }
 
-export function youveBeenGnomed() {
+export function weveBeenSorted() {
   document.querySelector(".gnomed").style.display = "flex";
 }
