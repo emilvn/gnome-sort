@@ -35,6 +35,26 @@ export function highlightCurrentGnome(index) {
   });
 }
 
+let previous;
+export function highlightGnome(index) {
+  const gnomes = document.querySelectorAll(".gnome");
+  if (previous) {
+    gnomes[previous].classList.remove("highlight");
+  }
+  gnomes[index].classList.add("highlight");
+  previous = index;
+}
+
+let previous1;
+export function highlightGnome1(index) {
+  const gnomes = document.querySelectorAll(".gnome");
+  if (previous1) {
+    gnomes[previous1].classList.remove("highlight1");
+  }
+  gnomes[index].classList.add("highlight");
+  previous1 = index;
+}
+
 export function initEventListeners() {
   const form = document.querySelector("form");
   const restartButtons = document.querySelectorAll(".restart-button");
@@ -50,4 +70,8 @@ export function hideOverlay() {
 
 export function weveBeenSorted() {
   document.querySelector(".gnomed").style.display = "flex";
+}
+
+export function showAlgorithm(algorithm) {
+  document.querySelector(".algorithm").innerText = algorithm;
 }

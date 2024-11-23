@@ -29,6 +29,9 @@
       .current {
         filter: invert(1);
       }
+      .highlight {
+        filter: saturate(400%);
+      }
       .inputs {
         display: flex;
         max-width: 800px;
@@ -69,10 +72,22 @@
         background-repeat: no-repeat;
         background-size: cover;
       }
+      .algorithm {
+        position: absolute;
+        color: white;
+        font-size: x-large;
+        top: 2px;
+        left: 2px;
+        background-color: rgba(5, 5, 5, 0.5);
+        padding: 8px;
+        border-radius: 0 0 5px 0;
+        backdrop-filter: blur(10px);
+      }
     </style>
   </head>
   <body>
     <div style="position: relative; width: fit-content">
+      <div class="algorithm"></div>
       <div class="container"></div>
       <div class="gnomed">
         <div style="display: flex; flex-direction: column; gap: 8px">
@@ -90,13 +105,12 @@
       <label>
         Algorithm:
         <select name="algorithm">
-          <option value="gnome" selected>Gnome</option>
+          <option value="quick" selected>Quick</option>
+          <option value="gnome">Gnome</option>
           <option value="insertion-shift">Insertion (shift)</option>
           <option value="insertion-swap">Insertion (swap)</option>
           <option value="bubble">Bubble</option>
           <option value="selection">Selection</option>
-          <option value="quick">Quick</option>
-          <option value="merge">Merge</option>
         </select>
       </label>
       <label>

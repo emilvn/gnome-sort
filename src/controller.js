@@ -1,18 +1,37 @@
 import * as view from "./view.js";
+import quickSort from "./algorithms/quicksort.js";
+import gnomeSort from "./algorithms/gnomesort.js";
+import {
+  insertionSortShift,
+  insertionSortSwap,
+} from "./algorithms/insertionsort.js";
+import selectionSort from "./algorithms/selectionsort.js";
+import bubbleSort from "./algorithms/bubblesort.js";
 
 window.addEventListener("load", main);
-let TICK_RATE = 100;
-let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 2);
-let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 1);
-let ALGORITHM = "gnome";
+// make gnome array fit screen
 window.addEventListener("resize", () => {
   MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 2;
   ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 1;
   gnomeRestart();
 });
+
+let TICK_RATE = 500;
+let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 2);
+let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 1);
+let ALGORITHM = "quick";
 let gnomes;
 let restart = false;
 let iterations = 0;
+
+const algorithmTextMap = {
+  gnome: "Gnome Sort",
+  "insertion-shift": "Insertion Sort (Shift)",
+  "insertion-swap": "Insertion Sort (Swap)",
+  bubble: "Bubble Sort",
+  selection: "Selection Sort",
+  quick: "Quick Sort",
+};
 
 function main() {
   view.initEventListeners();
@@ -22,6 +41,7 @@ function main() {
 function init() {
   iterations = 0;
   view.hideOverlay();
+  view.showAlgorithm(algorithmTextMap[ALGORITHM]);
   restart = false;
   gnomes = makeGnomeArray(MAX_STACK_HEIGHT, ARR_LENGTH);
   view.displayGnomes(gnomes);
@@ -41,11 +61,8 @@ function sortingAlgorithm(arr) {
     case "selection":
       return selectionSort(arr);
     case "quick":
-      return quickSort(arr);
-    case "merge":
-      return mergeSort(arr);
     default:
-      return gnomeSort(arr);
+      return quickSort(arr);
   }
 }
 
@@ -55,139 +72,8 @@ export function gnomeRestart() {
   setTimeout(init, TICK_RATE);
 }
 
-// Gnome sort
-
-async function gnomeSort(arr) {
-  iterations = 0;
-  let i = 0;
-  while (i < arr.length) {
-    iterations++;
-    view.displayGnomes(gnomes);
-    view.displayIterations(iterations);
-    view.highlightCurrentGnome(i);
-    if (i === 0 || arr[i] >= arr[i - 1]) {
-      i++;
-    } else {
-      swapGnomes(i, i - 1, arr);
-      i--;
-    }
-    if (restart) return;
-    await sleep(TICK_RATE);
-  }
-  view.weveBeenSorted();
-}
-
-// Insertion Sort
-
-async function insertionSortShift(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    iterations++;
-    const cur = arr[i];
-    if (arr[i] >= arr[i - 1]) {
-      continue;
-    }
-    let j = i;
-    while (arr[j - 1] > cur && j > 0) {
-      arr[j] = arr[--j];
-      view.displayGnomes(gnomes);
-      view.displayIterations(iterations);
-      view.highlightCurrentGnome(j);
-      if (restart) return;
-      await sleep(TICK_RATE);
-    }
-    arr[j] = cur;
-  }
-  view.weveBeenSorted();
-}
-
-async function insertionSortSwap(arr) {
-  iterations = 0;
-  for (let i = 1; i < arr.length; i++) {
-    iterations++;
-    let j = i;
-    while (j > 0 && arr[j - 1] > arr[j]) {
-      const tmp = arr[j];
-      arr[j] = arr[--j];
-      arr[j] = tmp;
-      view.displayGnomes(gnomes);
-      view.displayIterations(iterations);
-      view.highlightCurrentGnome(j);
-      if (restart) return;
-      await sleep(TICK_RATE);
-    }
-  }
-  view.weveBeenSorted();
-}
-
-// Quick Sort
-
-/**
- * sorts an array in place using quicksort algorithm, and returns it
- * @param {any[]} arr array to sort
- * @returns {any[]} sorted array
- */
-async function quickSort(arr) {
-  await _quickSort(arr, 0, arr.length - 1);
-  view.weveBeenSorted();
-  return arr;
-}
-
-/**
- * Sorts a "partition of an array" in place, divides it into partitions, then sorts those recursively
- * @param {any[]} arr
- * @param {number} low
- * @param {number} high
- * @returns {Promise<void>}
- */
-async function _quickSort(arr, low, high) {
-  if (low >= 0 && high >= 0 && low < high) {
-    const pivot = await partition(arr, low, high);
-    await Promise.all([
-      _quickSort(arr, low, pivot),
-      _quickSort(arr, pivot + 1, high),
-    ]);
-    if (restart) return;
-  }
-}
-
-/**
- * Divides an array into partitions and returns the pivot
- * @param {any[]} arr the array to partition
- * @param {number} low the lower bound of partition
- * @param {number} high the upper bound of partition
- * @returns {Promise<number>} The pivot
- */
-async function partition(arr, low, high) {
-  const pivot = arr[low];
-  while (true) {
-    iterations++;
-    // while element to the left of pivot is less than pivot, move right
-    while (arr[low] < pivot) low++;
-
-    // while element to the right of pivot is greater than pivot, move left
-    while (arr[high] > pivot) high--;
-
-    // If the indices crossed, return
-    if (low >= high) {
-      return high;
-    }
-    // if we get here, arr[low] >= pivot and arr[high] <= pivot, so we swap them
-    swapGnomes(low, high, arr);
-    low++; // increment low after swap
-    high--; // decrement high after swap
-    view.displayGnomes(gnomes);
-    view.displayIterations(iterations);
-    view.highlightCurrentGnome(pivot);
-    await sleep(TICK_RATE);
-  }
-}
-
-// helpers
-
-function swapGnomes(i, j, arr) {
-  const tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
+export function sleep() {
+  return new Promise((r) => setTimeout(r, TICK_RATE));
 }
 
 function makeGnomeArray(max_value, length) {
@@ -196,10 +82,6 @@ function makeGnomeArray(max_value, length) {
     arr[i] = Math.ceil(Math.random() * max_value);
   }
   return arr;
-}
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
 }
 
 export function submitForm(e) {
@@ -220,4 +102,48 @@ export function submitForm(e) {
   MAX_STACK_HEIGHT = maxHeight > 0 ? maxHeight : MAX_STACK_HEIGHT;
   ARR_LENGTH = arrLen > 0 ? arrLen : ARR_LENGTH;
   gnomeRestart();
+}
+
+export function updateGnomesViewInplace() {
+  view.displayGnomes(gnomes);
+  view.displayIterations(iterations);
+}
+
+export function updateGnomesView(arr) {
+  gnomes = arr;
+  view.displayGnomes(gnomes);
+  view.displayIterations(iterations);
+}
+
+export function sortingComplete() {
+  if (isSorted(gnomes)) {
+    view.weveBeenSorted();
+  }
+}
+
+export function highlightCurrentGnome(index) {
+  view.highlightCurrentGnome(index);
+}
+
+export function highlightGnome(index) {
+  view.highlightGnome(index);
+}
+
+export function highlightGnome1(index) {
+  view.highlightGnome1(index);
+}
+
+export function didRestart() {
+  return restart;
+}
+
+export function incrementIterations() {
+  iterations++;
+}
+
+function isSorted(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i + 1]) return false;
+  }
+  return true;
 }
