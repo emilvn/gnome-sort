@@ -30,7 +30,12 @@
         filter: invert(1);
       }
       .highlight {
-        filter: saturate(400%);
+        background-color: cyan;
+        border-radius: 5px;
+      }
+      .highlight1 {
+        background-color: yellow;
+        border-radius: 5px;
       }
       .inputs {
         display: flex;
@@ -83,6 +88,13 @@
         border-radius: 0 0 5px 0;
         backdrop-filter: blur(10px);
       }
+      .gnomed > div > div > .algorithm {
+        position: unset;
+        background-color: unset;
+        padding: unset;
+        border-radius: unset;
+        backdrop-filter: unset;
+      }
     </style>
   </head>
   <body>
@@ -92,6 +104,7 @@
       <div class="gnomed">
         <div style="display: flex; flex-direction: column; gap: 8px">
           We've been sorted!
+          <div>Algorithm: <span class="algorithm"></span></div>
           <div>Iterations: <span class="iterations"></span></div>
           <button type="button" class="restart-button">Restart</button>
         </div>

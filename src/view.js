@@ -51,7 +51,7 @@ export function highlightGnome1(index) {
   if (previous1) {
     gnomes[previous1].classList.remove("highlight1");
   }
-  gnomes[index].classList.add("highlight");
+  gnomes[index].classList.add("highlight1");
   previous1 = index;
 }
 
@@ -64,6 +64,13 @@ export function initEventListeners() {
   );
 }
 
+export function initInputValues(tickrate, stackHeight, arrLength) {
+  const from = document.querySelector("form");
+  from.tick_rate.value = tickrate;
+  from.stack_height.value = stackHeight;
+  from.arr_length.value = arrLength;
+}
+
 export function hideOverlay() {
   document.querySelector(".gnomed").style.display = "none";
 }
@@ -73,5 +80,7 @@ export function weveBeenSorted() {
 }
 
 export function showAlgorithm(algorithm) {
-  document.querySelector(".algorithm").innerText = algorithm;
+  document
+    .querySelectorAll(".algorithm")
+    .forEach((d) => (d.innerText = algorithm));
 }

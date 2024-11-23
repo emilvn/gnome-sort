@@ -64,7 +64,7 @@ async function partition(arr, low, high) {
     // while element to the right of pivot is greater than pivot, move left
     while (arr[high] > pivot) {
       controller.incrementIterations();
-      controller.highlightGnome(high);
+      controller.highlightGnome1(high);
       await controller.sleep();
       high--;
     }

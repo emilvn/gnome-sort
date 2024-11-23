@@ -42,6 +42,7 @@ function init() {
   iterations = 0;
   view.hideOverlay();
   view.showAlgorithm(algorithmTextMap[ALGORITHM]);
+  view.initInputValues(TICK_RATE, MAX_STACK_HEIGHT, ARR_LENGTH);
   restart = false;
   gnomes = makeGnomeArray(MAX_STACK_HEIGHT, ARR_LENGTH);
   view.displayGnomes(gnomes);
