@@ -49,6 +49,8 @@ async function partition(arr, low, high) {
   while (true) {
     controller.updateGnomesViewInplace();
     controller.highlightCurrentGnome(pivot);
+    controller.highlightGnome(low);
+    controller.highlightGnome(high);
     if (controller.didRestart()) return;
     await controller.sleep();
 
