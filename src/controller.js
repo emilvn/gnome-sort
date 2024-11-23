@@ -11,14 +11,14 @@ import bubbleSort from "./algorithms/bubblesort.js";
 window.addEventListener("load", main);
 // make gnome array fit screen
 window.addEventListener("resize", () => {
-  MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 2;
-  ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 1;
+  MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 3;
+  ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 2;
   gnomeRestart();
 });
 
 let TICK_RATE = 500;
-let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 2);
-let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 1);
+let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 3);
+let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 2);
 let ALGORITHM = "quick";
 let gnomes;
 let restart = false;
