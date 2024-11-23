@@ -30,10 +30,9 @@ export default async function quickSort(arr) {
 async function _quickSort(arr, low, high) {
   if (low >= 0 && high >= 0 && low < high) {
     const pivot = await partition(arr, low, high);
-    await Promise.all([
-      _quickSort(arr, low, pivot),
-      _quickSort(arr, pivot + 1, high),
-    ]);
+    controller.highlightCurrentGnome(pivot);
+    await _quickSort(arr, low, pivot);
+    await _quickSort(arr, pivot + 1, high);
     if (controller.didRestart()) return;
   }
 }
@@ -56,17 +55,17 @@ async function partition(arr, low, high) {
     // while element to the left of pivot is less than pivot, move right
     while (arr[low] < pivot) {
       controller.incrementIterations();
+      low++;
       controller.highlightGnome(low);
       await controller.sleep();
-      low++;
     }
 
     // while element to the right of pivot is greater than pivot, move left
     while (arr[high] > pivot) {
       controller.incrementIterations();
+      high--;
       controller.highlightGnome1(high);
       await controller.sleep();
-      high--;
     }
 
     // If the indices crossed, return
