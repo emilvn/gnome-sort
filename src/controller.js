@@ -12,8 +12,8 @@ import pancakeSort from "./algorithms/pancakesort.js";
 window.addEventListener("load", main);
 // make gnome array fit screen
 window.addEventListener("resize", () => {
-  MAX_STACK_HEIGHT = window.innerHeight / view.GNOME_HEIGHT - 3;
-  ARR_LENGTH = window.innerWidth / view.GNOME_WIDTH - 2;
+  MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 3);
+  ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 2);
   gnomeRestart();
 });
 
