@@ -17,7 +17,7 @@ window.addEventListener("resize", () => {
   gnomeRestart();
 });
 
-let TICK_RATE = 500;
+let TICK_RATE = 250;
 let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 3);
 let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 2);
 let ALGORITHM = "pancake";
@@ -51,7 +51,7 @@ function init() {
   sortingAlgorithm(gnomes);
 }
 
-function sortingAlgorithm(arr) {
+async function sortingAlgorithm(arr) {
   switch (ALGORITHM) {
     case "gnome":
       return gnomeSort(arr);
