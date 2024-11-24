@@ -7,6 +7,7 @@ import {
 } from "./algorithms/insertionsort.js";
 import selectionSort from "./algorithms/selectionsort.js";
 import bubbleSort from "./algorithms/bubblesort.js";
+import pancakeSort from "./algorithms/pancakesort.js";
 
 window.addEventListener("load", main);
 // make gnome array fit screen
@@ -31,6 +32,7 @@ const algorithmTextMap = {
   bubble: "Bubble Sort",
   selection: "Selection Sort",
   quick: "Quick Sort",
+  pancake: "Pancake Sort",
 };
 
 function main() {
@@ -62,6 +64,9 @@ function sortingAlgorithm(arr) {
     case "selection":
       return selectionSort(arr);
     case "quick":
+      return quickSort(arr);
+    case "pancake":
+      return pancakeSort(arr);
     default:
       return quickSort(arr);
   }
@@ -132,6 +137,14 @@ export function highlightGnome(index) {
 
 export function highlightGnome1(index) {
   view.highlightGnome1(index);
+}
+
+export function highlightUnsortedRegion(size) {
+  view.highlightUnsortedRegion(size);
+}
+
+export function clearCurrentHighlights() {
+  view.clearCurrentHighlights();
 }
 
 export function didRestart() {
