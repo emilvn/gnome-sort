@@ -5,16 +5,8 @@ import * as helpers from "./helpers.js";
  * Pancake sort implementation optimized for reducing unnecessary comparisons 
  * when finding the maximum element in each iteration.
  * 
- * Unlike the basic pancake sort that always searches the entire unsorted portion,
- * this implementation:
- * - Tracks the largest value seen in the unsorted portion to enable early termination
- * - Skips flip operations when elements are already in position
- * 
  * Time Complexity: O(n²)
  * Space Complexity: O(1)
- * 
- * Best performance when array contains distinct value clusters, as this 
- * maximizes opportunities for early termination during max-finding.
  * 
  * Algorithm steps:
  * 
