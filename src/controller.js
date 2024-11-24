@@ -147,6 +147,10 @@ export function clearCurrentHighlights() {
   view.clearCurrentHighlights();
 }
 
+export function clearAllHighlights() {
+  view.clearAllHighlights();
+}
+
 export function didRestart() {
   return restart;
 }

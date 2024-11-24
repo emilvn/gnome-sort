@@ -73,6 +73,13 @@ export function clearCurrentHighlights() {
   });
 }
 
+export function clearAllHighlights() {
+  const gnomes = document.querySelectorAll(".gnome");
+  gnomes.forEach((gnome) => {
+    gnome.classList.remove("current", "highlight", "highlight1", "unsorted");
+  });
+}
+
 export function initEventListeners() {
   const form = document.querySelector("form");
   const restartButtons = document.querySelectorAll(".restart-button");
