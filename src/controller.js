@@ -20,7 +20,7 @@ window.addEventListener("resize", () => {
 let TICK_RATE = 500;
 let MAX_STACK_HEIGHT = Math.ceil(window.innerHeight / view.GNOME_HEIGHT - 3);
 let ARR_LENGTH = Math.ceil(window.innerWidth / view.GNOME_WIDTH - 2);
-let ALGORITHM = "quick";
+let ALGORITHM = "pancake";
 let gnomes;
 let restart = false;
 let iterations = 0;
@@ -68,7 +68,7 @@ function sortingAlgorithm(arr) {
     case "pancake":
       return pancakeSort(arr);
     default:
-      return quickSort(arr);
+      return pancakeSort(arr);
   }
 }
 
