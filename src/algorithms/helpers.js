@@ -14,13 +14,6 @@ export function swapGnomes(i, j, arr) {
 /**
  * Animates the flipping of a section of an array of elements within a container.
  * 
- * This function creates a new div element to represent the section of the array
- * to be flipped. It then clones the elements in the specified section and appends
- * them to the front and back sides of the flip section. The flip section is then
- * appended to the container, and the flipping animation is triggered by adding the
- * 'flipping' class to the flip section. Once the animation is complete, the original
- * elements are made visible again and the flip section is removed from the container.
- * 
  * @param {Array} arr - The array of elements to be flipped.
  * @param {number} start - The starting index of the section to be flipped.
  * @param {number} end - The ending index of the section to be flipped.
@@ -42,8 +35,8 @@ export async function animateFlip(arr, start, end) {
   
   const frontSide = document.createElement('div');
   const backSide = document.createElement('div');
-  elements.forEach(el => {
-    const clone = el.cloneNode(true);
+  elements.forEach(element => {
+    const clone = element.cloneNode(true);
     frontSide.appendChild(clone);
     backSide.insertBefore(clone.cloneNode(true), backSide.firstChild);
   });
