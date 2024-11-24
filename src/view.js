@@ -24,6 +24,17 @@ export function displayIterations(iterations) {
     .forEach((i) => (i.innerText = iterations));
 }
 
+export function highlightUnsortedRegion(index) {
+  const gnomes = document.querySelectorAll(".gnome");
+  gnomes.forEach((gnome, i) => {
+    if (i < index) {
+      gnome.classList.add("unsorted");
+    } else {
+      gnome.classList.remove("unsorted");
+    }
+  });
+}
+
 export function highlightCurrentGnome(index) {
   const gnomes = document.querySelectorAll(".gnome");
   gnomes.forEach((gnome, i) => {
@@ -53,6 +64,13 @@ export function highlightGnome1(index) {
   }
   gnomes[index].classList.add("highlight1");
   previous1 = index;
+}
+
+export function clearCurrentHighlights() {
+  const gnomes = document.querySelectorAll(".gnome");
+  gnomes.forEach((gnome) => {
+      gnome.classList.remove("current", "highlight", "highlight1");
+  });
 }
 
 export function initEventListeners() {
