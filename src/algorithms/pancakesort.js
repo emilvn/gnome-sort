@@ -70,6 +70,8 @@ export default async function pancakeSort(arr) {
     if (maxIdx !== 0) {
       flipPancake(arr, 0, maxIdx);
       controller.updateGnomesViewInplace();
+      controller.highlightGnome(0);
+      controller.highlightUnsortedRegion(size);
     }
     await controller.sleep();
     flipPancake(arr, 0, size - 1);
