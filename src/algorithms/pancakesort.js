@@ -9,37 +9,33 @@ import * as controller from "../controller.js";
  *
  * Algorithm steps:
  *
- * 1. Initialize by finding the largest value in the entire array
+ * 1. For each position from end to start:
  *
- * 2. For each position from end to start:
+ *    1.1. Find maximum in unsorted portion:
+ *      - Track current and previous maximum while searching
+ *      - If we find a value === previous maximum, we break early
  *
- *    2.1. Find maximum in unsorted portion (optimized):
- *      - Track current maximum while searching
- *      - If we find value >= largestSeenUnsorted, we've found our definite maximum
- *      - Update largestSeenUnsorted for next iteration
- *
- *    2.2. If maximum is not in correct position:
- *      - If maximum is not at front, flip array from front to maximum
+ *    1.2. If maximum is not in correct position:
+ *      - If maximum is not at front:
+ *          - flip array from front to maximum
  *      - Flip array from front to correct position
  *
- *    2.3. Reduce unsorted portion size by 1
+ *    1.3. Reduce unsorted portion size by 1
  *
- * 3. Return the sorted array
+ * 2. Return the sorted array
  *
  * @param {number[]} arr - Array to be sorted
  * @returns {Promise<number[]>} The sorted array
  */
 export default async function pancakeSort(arr) {
   controller.highlightUnsortedRegion(arr.length);
-  let largestSeenUnsorted = Math.max(...arr);
-
+  let prevMax = Math.INFINITY;
   for (let size = arr.length; size > 1; size--) {
     let maxIdx = 0;
     let maxValue = arr[0];
-    let foundDefiniteMax = false;
 
     // Find maximum with early termination
-    for (let i = 0; i < size && !foundDefiniteMax; i++) {
+    for (let i = 0; i < size; i++) {
       if (i > 0) controller.incrementIterations();
 
       controller.updateGnomesViewInplace();
@@ -49,15 +45,18 @@ export default async function pancakeSort(arr) {
       if (controller.didRestart()) return arr;
       await controller.sleep();
 
+      if (arr[i] === prevMax) {
+        maxIdx = i;
+        maxValue = arr[i];
+        break;
+      }
+
       if (arr[i] > maxValue) {
         maxIdx = i;
         maxValue = arr[i];
-        foundDefiniteMax = maxValue >= largestSeenUnsorted;
       }
     }
-
-    largestSeenUnsorted = Math.max(...arr.slice(0, size - 1));
-
+    prevMax = maxValue;
     // Skip if maximum is already in position
     if (maxIdx === size - 1) {
       controller.clearCurrentHighlights();
