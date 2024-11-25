@@ -71,6 +71,7 @@ export default async function pancakeSort(arr) {
       flipPancake(arr, 0, maxIdx);
       controller.updateGnomesViewInplace();
     }
+    await controller.sleep();
     flipPancake(arr, 0, size - 1);
     controller.updateGnomesViewInplace();
 
